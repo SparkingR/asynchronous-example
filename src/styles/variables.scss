@@ -1,6 +1,14 @@
 // colors
-$background-dark-blue: #181743;
-$background-light-blue: #265d6f;
+$yankees-blue: rgba(24, 23, 67, 1);
+$sapphire-blue: rgba(38, 93, 111, 1);
+$feldgrau: rgba(63, 94, 90, 1);
+$medium-spring-green: rgba(32, 252, 143, 1);
+$charleston-green: rgba(45, 45, 42, 1);
+
+// map
+$bg-start: $yankees-blue;
+$bg-end: $sapphire-blue;
+$search-bar-text: $charleston-green;
 
 // fonts
 $regular: 400;

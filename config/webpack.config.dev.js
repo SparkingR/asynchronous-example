@@ -374,6 +374,7 @@ module.exports = {
     new StyleLintPlugin({
       configFile: '.stylelintrc.json',
       files: 'src/**/*.(s)?(a|c)ss',
+      emitErrors: false,
     }),
   ],
 
