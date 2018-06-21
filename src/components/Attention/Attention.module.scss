@@ -1,0 +1,19 @@
+@import 'sass-rem';
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.attention-container {
+  @include size(400px);
+
+  text-align: center;
+}
+
+.attention-text {
+  font-size: rem(100px);
+  color: $attention-text;
+}
+
+.attention-number {
+  font-size: rem(60px);
+  color: $attention-number;
+}
