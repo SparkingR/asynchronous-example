@@ -2,18 +2,36 @@
 @import '~styles/mixins';
 @import '~styles/variables';
 
-.attention-container {
-  @include size(400px);
+.repo-data {
+  @include size(80%);
+  @include horizontal-center($type: margin);
 
+  margin-top: 60px;
+  font-size: rem(45px);
   text-align: center;
+
+  > *:not(:first-child) {
+    &:nth-child(odd) {
+      color: $repo-odd;
+    }
+
+    &:nth-child(even) {
+      color: $repo-even;
+    }
+
+    &::before {
+      font-size: rem(30px);
+      content: '●';
+    }
+  }
 }
 
-.attention-text {
-  font-size: rem(100px);
-  color: $attention-text;
+.repo-name {
+  font-size: rem(65px);
+  color: $repo-name;
 }
 
-.attention-number {
-  font-size: rem(60px);
-  color: $attention-number;
+.repo-attention {
+  font-size: rem(80px);
+  color: $repo-attention;
 }

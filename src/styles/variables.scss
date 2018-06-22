@@ -1,16 +1,19 @@
 // colors
-$yankees-blue: rgba(24, 23, 67, 1);
-$sapphire-blue: rgba(38, 93, 111, 1);
-$feldgrau: rgba(63, 94, 90, 1);
-$medium-spring-green: rgba(32, 252, 143, 1);
-$charleston-green: rgba(45, 45, 42, 1);
+$yankees-blue: #181743;
+$sapphire-blue: #265d6f;
+$medium-sky-blue: #68e8e8;
+$royal-blue: #4a74e0;
+$iris: #6055c1;
+$white: #fff;
 
 // map
 $bg-start: $yankees-blue;
 $bg-end: $sapphire-blue;
-$search-bar-text: $charleston-green;
-$attention-text: $feldgrau;
-$attention-number: $medium-spring-green;
+$search-bar-text: $yankees-blue;
+$repo-name: $medium-sky-blue;
+$repo-odd: $royal-blue;
+$repo-even: $iris;
+$repo-attention: $white;
 
 // fonts
 $regular: 400;

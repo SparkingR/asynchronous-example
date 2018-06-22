@@ -4,7 +4,7 @@ import styles from './App.module.scss'
 import Header from '../components/Header/Header'
 import SearchBar from '../components/SearchBar/SearchBar'
 import RepoAttention from '../components/RepoAttention/RepoAttention'
-import logo from '../assets/logo.svg'
+// import logo from '../assets/logo.svg'
 
 const cx = classNames.bind(styles)
 class App extends Component {
@@ -13,8 +13,15 @@ class App extends Component {
       <div className={cx('app')}>
         <Header />
         <SearchBar />
-        <RepoAttention />
-        <img src={logo} className={cx('app-logo')} alt="logo" />
+        <RepoAttention
+          language="Javascript"
+          star={12345}
+          fork={324}
+          contributor={3242}
+          follow={989}
+          attention="123124"
+        />
+        {/* <img src={logo} className={cx('app-logo')} alt="logo" /> */}
       </div>
     )
   }
