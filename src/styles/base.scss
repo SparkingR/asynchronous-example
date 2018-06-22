@@ -1,9 +1,9 @@
 /* stylelint-disable selector-max-id */
 @import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
 @import './normalize';
-@import './variables';
 @import './fonts';
-@import './mixins';
 
 *,
 *::before,
@@ -12,10 +12,10 @@
   padding: 0;
   margin: 0;
   font-family: 'VT323', sans-serif;
+}
 
-  :not(input) {
-    user-select: none;
-  }
+*:not(input) {
+  user-select: none;
 }
 
 html,
