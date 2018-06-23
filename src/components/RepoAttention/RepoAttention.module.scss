@@ -6,7 +6,7 @@
   @include size(80%);
   @include horizontal-center($type: margin);
 
-  margin-top: 60px;
+  margin-top: 50px;
   font-size: rem(45px);
   text-align: center;
 
@@ -26,9 +26,19 @@
   }
 }
 
-.repo-name {
-  font-size: rem(65px);
+.repo-text {
   color: $repo-name;
+
+  .repo-name {
+    font-size: rem(65px);
+  }
+
+  .repo-description {
+    @include size(80%);
+    @include horizontal-center($type: margin);
+
+    font-size: rem(25px);
+  }
 }
 
 .repo-attention {

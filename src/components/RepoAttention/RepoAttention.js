@@ -6,22 +6,25 @@ import styles from './RepoAttention.module.scss'
 const cx = classNames.bind(styles)
 
 const RepoAttention = ({
+  name,
+  description,
   language,
-  star,
-  fork,
-  contributor,
-  follow,
+  stars,
+  forks,
+  followers,
   attention,
 }) => (
   <Fragment>
     <div className={cx('repo-data')}>
-      <div className={cx('repo-name')}>styled-components/styled-components</div>
+      <div className={cx('repo-text')}>
+        <div className={cx('repo-name')}>{name}</div>
+        <div className={cx('repo-description')}>{description}</div>
+      </div>
       <div>{language}</div>
-      <div>stars : {star}</div>
-      <div>forks : {fork}</div>
-      <div>contributors : {contributor}</div>
+      <div>stars : {stars}</div>
+      <div>forks : {forks}</div>
       <div>
-        top5 contributors{"'"} followers : {follow}
+        top5 contributors{"'"} total followers : {followers}
       </div>
     </div>
     <div className={cx('repo-attention')}>Attention : {attention}</div>
@@ -29,11 +32,12 @@ const RepoAttention = ({
 )
 
 RepoAttention.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
-  star: PropTypes.number.isRequired,
-  fork: PropTypes.number.isRequired,
-  contributor: PropTypes.number.isRequired,
-  follow: PropTypes.number.isRequired,
+  stars: PropTypes.number.isRequired,
+  forks: PropTypes.number.isRequired,
+  followers: PropTypes.number.isRequired,
   attention: PropTypes.number.isRequired,
 }
 
