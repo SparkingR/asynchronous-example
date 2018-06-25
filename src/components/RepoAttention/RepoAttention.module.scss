@@ -8,7 +8,6 @@
 
   margin-top: 50px;
   font-size: rem(45px);
-  text-align: center;
 
   > *:not(:first-child) {
     &:nth-child(odd) {
@@ -20,14 +19,14 @@
     }
 
     &::before {
-      font-size: rem(30px);
+      font-size: rem(25px);
       content: '●';
     }
   }
 }
 
 .repo-text {
-  color: $repo-name;
+  color: $repo-text;
 
   .repo-name {
     font-size: rem(65px);

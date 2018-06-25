@@ -7,33 +7,32 @@ import Header from '../components/Header/Header'
 import SearchBar from '../components/SearchBar/SearchBar'
 import RepoAttention from '../components/RepoAttention/RepoAttention'
 // import logo from '../assets/logo.svg'
-import { getRepo, getContributors, getUserFollowers } from '../api'
+import { getAttention } from '../api'
 
 const cx = classNames.bind(styles)
 class App extends Component {
   state = { repo: {} }
 
-  componentDidMount() {
-    getRepo('react')
-      .then(repo => {
-        this.setState({ repo: repo })
-        return repo.contributorsUrl
-      })
-      .then(contributorsUrl => getContributors(contributorsUrl))
-      .then(contributors =>
-        axios.all(contributors.map(e => getUserFollowers(e)))
-      )
-      .then(followers => {
-        const { repo } = this.state
-        const totalFollowers = followers.reduce((a, b) => a + b, 0)
-        const attention = repo.stars + repo.forks + totalFollowers
-        const newRepo = {
-          ...this.state.repo,
-          attention,
-          followers: totalFollowers,
-        }
-        this.setState({ repo: newRepo })
-      })
+  search = keyWord => {
+    const keyWordTrim = keyWord.trim()
+    keyWordTrim &&
+      getAttention(keyWordTrim)
+      .then(res => this.setState({ repo: res }))
+      .catch(err => console.error('error', err))
+  }
+
+  handleClick = keyWord => {
+    this.search(keyWord)
+  }
+
+  handleKeyDown = (event, keyWord) => {
+    switch (event.keyCode) {
+      case 13:
+        this.search(keyWord)
+        break
+      default:
+        break
+    }
   }
 
   render() {
@@ -41,7 +40,10 @@ class App extends Component {
     return (
       <div className={cx('app')}>
         <Header />
-        <SearchBar />
+        <SearchBar
+          handleClick={this.handleClick}
+          handleKeyDown={this.handleKeyDown}
+        />
         <RepoAttention
           name={repo.name || ''}
           description={repo.description || ''}

@@ -43,7 +43,12 @@ export const getRepo = keyWord =>
   })
     // get the best match of searched results
     // which is the first element by github's sorting
-    .then(res => res.data.items[0])
+    .then(
+      res =>
+        res.data.total_count
+          ? res.data.items[0]
+          : Promise.reject(new Error('no result!'))
+    )
     .then(repo => ({
       name: repo.full_name,
       description: repo.description,
@@ -66,3 +71,24 @@ export const getUserFollowers = userId =>
     method: 'GET',
     endpoint: `/users/${userId}`,
   }).then(res => res.data.followers)
+
+export const getAttention = keyWord => {
+  let repoAttention
+  return getRepo(keyWord)
+    .then(repo => {
+      repoAttention = repo
+      return getContributors(repo.contributorsUrl)
+    })
+    .then(contributors => axios.all(contributors.map(e => getUserFollowers(e))))
+    .then(followers => {
+      const totalFollowers = followers.reduce((a, b) => a + b, 0)
+      const attention =
+        repoAttention.stars + repoAttention.forks + totalFollowers
+      const newRepoAttention = {
+        ...repoAttention,
+        attention,
+        followers: totalFollowers,
+      }
+      return newRepoAttention
+    })
+}
