@@ -1,48 +1,38 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
 import styles from './SearchBar.module.scss'
 
 const cx = classNames.bind(styles)
 
-class SearchBar extends Component {
-  static propTypes = {
-    handleClick: PropTypes.func.isRequired,
-    handleKeyDown: PropTypes.func.isRequired,
-  }
+const SearchBar = ({ inputValue, onChange, onClick, onKeyDown }) => (
+  <div className={cx('search-bar')}>
+    <input
+      type="text"
+      placeholder=" Github repo name ? "
+      className={cx('text-field')}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+      value={inputValue}
+    />
+    <div
+      className={cx('submit-btn')}
+      onClick={onClick}
+      role="button"
+      tabIndex="0">
+      <FontAwesomeIcon className={cx('icon')} icon={faSearch} inverse />
+    </div>
+  </div>
+)
 
-  state = { value: '' }
-
-  handleChange = e => {
-    this.setState({ value: e.target.value })
-  }
-
-  render() {
-    const keyWord = this.state.value
-    const { handleClick, handleKeyDown } = this.props
-    return (
-      <div className={cx('search-bar')}>
-        <input
-          type="text"
-          placeholder=" Github repo name ? "
-          className={cx('text-field')}
-          onChange={this.handleChange}
-          onKeyDown={e => handleKeyDown(e, keyWord)}
-          value={this.state.value}
-        />
-        <div
-          className={cx('submit-btn')}
-          onClick={() => handleClick(keyWord)}
-          role="button"
-          tabIndex="0">
-          <FontAwesomeIcon className={cx('icon')} icon={faSearch} inverse />
-        </div>
-      </div>
-    )
-  }
+SearchBar.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func.isRequired,
 }
 
 export default SearchBar

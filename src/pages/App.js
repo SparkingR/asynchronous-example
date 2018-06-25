@@ -11,24 +11,35 @@ import { getAttention } from '../api'
 
 const cx = classNames.bind(styles)
 class App extends Component {
-  state = { repo: {} }
+  state = {
+    repo: {},
+    inputValue: '',
+  }
 
-  search = keyWord => {
+  handleChange = event => {
+    const newValue = event.target.value
+    this.setState(() => ({
+      inputValue: newValue,
+    }))
+  }
+
+  searchRepo = () => {
+    const keyWord = this.state.inputValue
     const keyWordTrim = keyWord.trim()
     keyWordTrim &&
       getAttention(keyWordTrim)
-      .then(res => this.setState({ repo: res }))
-      .catch(err => console.error('error', err))
+        .then(res => this.setState(() => ({ repo: res })))
+        .catch(err => console.error('error', err))
   }
 
-  handleClick = keyWord => {
-    this.search(keyWord)
+  handleClick = () => {
+    this.searchRepo()
   }
 
-  handleKeyDown = (event, keyWord) => {
+  handleKeyDown = event => {
     switch (event.keyCode) {
       case 13:
-        this.search(keyWord)
+        this.searchRepo()
         break
       default:
         break
@@ -36,13 +47,15 @@ class App extends Component {
   }
 
   render() {
-    const { repo } = this.state
+    const { repo, inputValue } = this.state
     return (
       <div className={cx('app')}>
         <Header />
         <SearchBar
-          handleClick={this.handleClick}
-          handleKeyDown={this.handleKeyDown}
+          inputValue={inputValue}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+          onKeyDown={this.handleKeyDown}
         />
         <RepoAttention
           name={repo.name || ''}
