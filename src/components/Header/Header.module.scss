@@ -5,16 +5,15 @@
 .header {
   @include size(100%, 200px, 200px);
 
-  // border: 1px solid #f00;
-}
+  text-align: center;
 
-.icon {
-  vertical-align: middle;
+  > * {
+    vertical-align: middle;
+  }
 }
 
 .title {
   margin-left: 40px;
   font-size: rem(80px);
   color: #fff;
-  vertical-align: middle;
 }

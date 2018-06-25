@@ -3,22 +3,24 @@
 @import '~styles/variables';
 
 .search-bar {
-  @include size(520px, 50px);
+  @include size(100%, 50px);
   @include horizontal-center($type: margin);
   @include flex-center;
+
+  > * {
+    border: 0;
+    outline: none;
+    transition: 0.3s;
+  }
 }
 
 .text-field {
   @include size(450px, 50px);
 
-  padding: 5px;
   font-size: rem(35px);
   color: $search-bar-text;
   text-align: center;
-  border: 0;
   border-radius: 10px 0 0 10px;
-  outline: none;
-  transition: 0.3s;
 
   &:hover,
   &:focus {
@@ -32,10 +34,8 @@
 
   background: $btn;
   border-radius: 0 10px 10px 0;
-  outline: none;
-  transition: 0.3s;
 
-  .icon {
+  .search-icon {
     @include size(20px, 20px);
 
     transition: 0.3s;
@@ -44,7 +44,7 @@
   &:hover {
     background: $search-bar-hover;
 
-    .icon {
+    .search-icon {
       @include size(30px, 30px);
     }
   }

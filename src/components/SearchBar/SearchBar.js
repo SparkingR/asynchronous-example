@@ -18,13 +18,9 @@ const SearchBar = ({ inputValue, onChange, onClick, onKeyDown }) => (
       onKeyDown={onKeyDown}
       value={inputValue}
     />
-    <div
-      className={cx('submit-btn')}
-      onClick={onClick}
-      role="button"
-      tabIndex="0">
-      <FontAwesomeIcon className={cx('icon')} icon={faSearch} inverse />
-    </div>
+    <button className={cx('submit-btn')} onClick={onClick}>
+      <FontAwesomeIcon className={cx('search-icon')} icon={faSearch} inverse />
+    </button>
   </div>
 )
 

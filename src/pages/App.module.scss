@@ -1,18 +1,7 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
 .app {
-  text-align: center;
-}
-
-.app-logo {
-  height: 40vmin;
-  animation: app-logo-spin infinite 2s linear;
-}
-
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  @include size(100%,100%);
 }
