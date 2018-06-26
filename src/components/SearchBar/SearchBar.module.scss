@@ -6,6 +6,10 @@
   @include size(100%, 50px);
   @include horizontal-center($type: margin);
   @include flex-center;
+  @include position(relative,$top:0);
+
+  z-index: 1;
+  transition: 1s;
 
   > * {
     border: 0;

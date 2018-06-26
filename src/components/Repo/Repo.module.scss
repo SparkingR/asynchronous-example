@@ -2,15 +2,6 @@
 @import '~styles/mixins';
 @import '~styles/variables';
 
-.repo {
-  @include size(100%, calc(100% - 250px));
-  @include flex-center;
-
-  flex-direction: column;
-  text-align: center;
-}
-
-// success
 .repo-data {
   @include size(80%);
   @include horizontal-center($type: margin);
@@ -38,6 +29,11 @@
 
   .repo-name {
     font-size: rem(65px);
+
+    &:link,
+    &:visited {
+      color: $repo-text;
+    }
   }
 
   .repo-description {
@@ -51,27 +47,4 @@
 .repo-attention {
   font-size: rem(80px);
   color: $repo-attention;
-}
-
-.loader {
-  @include size(250px, 250px);
-
-  border: 25px solid $loader-border;
-  border-top: 25px solid $loader-spin;
-  border-radius: 100%;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.error-icon.error-icon {
-  @include size(300px, 300px);
 }

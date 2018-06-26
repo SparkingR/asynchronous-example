@@ -1,0 +1,22 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.loader {
+  @include size(250px, 250px);
+
+  border: 25px solid $loader-border;
+  border-top: 25px solid $loader-spin;
+  border-radius: 100%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

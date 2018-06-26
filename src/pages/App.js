@@ -3,7 +3,7 @@ import classNames from 'classnames/bind'
 import styles from './App.module.scss'
 import Header from '../components/Header/Header'
 import SearchBar from '../components/SearchBar/SearchBar'
-import Repo from '../components/Repo/Repo'
+import Content from '../features/Content'
 import { getAttention } from '../api'
 
 const cx = classNames.bind(styles)
@@ -58,15 +58,19 @@ class App extends Component {
     const { repo, inputValue, requestState } = this.state
     return (
       <div className={cx('app')}>
-        <Header />
+        <Header
+          className={cx({ 'hearder-offset': requestState === 'initial' })}
+        />
         <SearchBar
+          className={cx({ 'search-bar-offset': requestState === 'initial' })}
           inputValue={inputValue}
           onChange={this.handleChange}
           onClick={this.handleClick}
           onKeyDown={this.handleKeyDown}
         />
-        <Repo
+        <Content
           requestState={requestState}
+          htmlUrl={repo.htmlUrl}
           name={repo.name || ''}
           description={repo.description || ''}
           language={repo.language || ''}

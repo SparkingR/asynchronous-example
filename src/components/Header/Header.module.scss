@@ -4,8 +4,10 @@
 
 .header {
   @include size(100%, 200px, 200px);
+  @include position(relative, $top: 0);
 
   text-align: center;
+  transition: 1s;
 
   > * {
     vertical-align: middle;
@@ -15,5 +17,5 @@
 .title {
   margin-left: 40px;
   font-size: rem(80px);
-  color: #fff;
+  color: $title;
 }

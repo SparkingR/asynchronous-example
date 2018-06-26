@@ -50,6 +50,7 @@ export const getRepo = keyWord =>
           : Promise.reject(new Error('no result!'))
     )
     .then(repo => ({
+      htmlUrl: repo.html_url,
       name: repo.full_name,
       description: repo.description,
       language: repo.language,

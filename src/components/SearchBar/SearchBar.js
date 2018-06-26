@@ -8,8 +8,8 @@ import styles from './SearchBar.module.scss'
 
 const cx = classNames.bind(styles)
 
-const SearchBar = ({ inputValue, onChange, onClick, onKeyDown }) => (
-  <div className={cx('search-bar')}>
+const SearchBar = ({ className, inputValue, onChange, onClick, onKeyDown }) => (
+  <div className={cx('search-bar', className)}>
     <input
       type="text"
       placeholder=" Github repo name ? "
@@ -25,6 +25,7 @@ const SearchBar = ({ inputValue, onChange, onClick, onKeyDown }) => (
 )
 
 SearchBar.propTypes = {
+  className: PropTypes.string.isRequired,
   inputValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
