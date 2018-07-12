@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames/bind'
+import { isEmpty } from 'lodash'
 import styles from './App.module.scss'
 import Header from '../components/Header/Header'
 import SearchBar from '../components/SearchBar/SearchBar'
@@ -31,10 +32,13 @@ class App extends Component {
 
       getAttention(keyWordTrim)
         .then(res =>
-          this.setState(() => ({ repo: res, requestState: 'success' }))
+          this.setState(() => ({
+            repo: res,
+            requestState: isEmpty(res) ? 'nomatch' : 'success',
+          }))
         )
         .catch(err => {
-          console.error('error', err)
+          console.error('Error', err.config)
           this.setState(() => ({ requestState: 'error' }))
         })
     }
@@ -50,7 +54,6 @@ class App extends Component {
         this.searchRepo()
         break
       default:
-        break
     }
   }
 
@@ -71,13 +74,13 @@ class App extends Component {
         <Content
           requestState={requestState}
           htmlUrl={repo.htmlUrl}
-          name={repo.name || ''}
-          description={repo.description || ''}
-          language={repo.language || ''}
-          stars={repo.stars || 0}
-          forks={repo.forks || 0}
-          followers={repo.followers || 0}
-          attention={repo.attention || 0}
+          name={repo.name}
+          description={repo.description}
+          language={repo.language}
+          stars={repo.stars}
+          forks={repo.forks}
+          followers={repo.followers}
+          attention={repo.attention}
         />
       </div>
     )

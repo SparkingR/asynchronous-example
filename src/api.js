@@ -1,37 +1,33 @@
 import axios from 'axios'
-import qs from 'query-string'
+import idx from 'idx'
+import { isUndefined, isEmpty } from 'lodash'
 import { host, contributorsLimit } from './config'
 
-const request = ({
-  method,
+// Use query-string
+// import qs from 'query-string'
+// const request = ({ method = 'get', endpoint, query = {}, fullUrl = '' }) => {
+//   const stringifiedQuery = qs.stringify(query)
+//   const separator = stringifiedQuery ? '?' : ''
+//   const url = fullUrl || [host, endpoint, separator, stringifiedQuery].join('')
+
+//   return axios({
+//     method,
+//     url,
+//   }).catch(error => console.error('Error', error.config))
+// }
+
+export const request = ({
+  method = 'get',
   endpoint,
-  query = undefined,
-  fullUrl = undefined,
+  query = {},
+  fullUrl = '',
 }) => {
-  const stringifiedQuery = qs.stringify(query)
-  const separator = stringifiedQuery ? '?' : ''
-  const url = fullUrl || [host, endpoint, separator, stringifiedQuery].join('')
+  const url = fullUrl || host + endpoint
 
   return axios({
     method,
     url,
-  }).catch(error => {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.warn(error.response.data)
-      console.warn(error.response.status)
-      console.warn(error.response.headers)
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      console.warn(error.request)
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.warn('Error', error.message)
-    }
-    console.warn(error.config)
+    params: query,
   })
 }
 
@@ -41,31 +37,35 @@ export const getRepo = keyWord =>
     endpoint: '/search/repositories',
     query: { q: keyWord },
   })
-    // get the best match of searched results
-    // which is the first element by github's sorting
-    .then(
-      res =>
-        res.data.total_count
-          ? res.data.items[0]
-          : Promise.reject(new Error('no result!'))
+    .then(res =>
+      // get the best match of searched results
+      // which is the first element by github's sorting
+      idx(res, _ => _.data.items[0])
     )
-    .then(repo => ({
-      htmlUrl: repo.html_url,
-      name: repo.full_name,
-      description: repo.description,
-      language: repo.language,
-      forks: repo.forks,
-      stars: repo.stargazers_count,
-      contributorsUrl: repo.contributors_url,
-    }))
+    .then(
+      repo =>
+        !isUndefined(repo)
+          ? {
+              htmlUrl: repo.html_url,
+              name: repo.full_name,
+              description: repo.description || '',
+              language: repo.language || '',
+              forks: repo.forks,
+              stars: repo.stargazers_count,
+              contributorsUrl: repo.contributors_url,
+            }
+          : {}
+    )
 
-export const getContributors = contributorsUrl =>
+export const getContributorIds = contributorsUrl =>
   request({
     method: 'GET',
     fullUrl: contributorsUrl,
   })
-    .then(res => res.data.slice(0, contributorsLimit))
-    .then(contributors => contributors.map(e => e.login))
+    .then(
+      res => (isEmpty(res.data) ? [] : res.data.slice(0, contributorsLimit))
+    )
+    .then(contributors => contributors.map(contributor => contributor.login))
 
 export const getUserFollowers = userId =>
   request({
@@ -74,22 +74,37 @@ export const getUserFollowers = userId =>
   }).then(res => res.data.followers)
 
 export const getAttention = keyWord => {
-  let repoAttention
+  let repoData
+  let isDone
   return getRepo(keyWord)
     .then(repo => {
-      repoAttention = repo
-      return getContributors(repo.contributorsUrl)
+      isDone = isEmpty(repo)
+      if (isDone) return {}
+
+      repoData = repo
+      return getContributorIds(repo.contributorsUrl)
     })
-    .then(contributors => axios.all(contributors.map(e => getUserFollowers(e))))
+    .then(contributorId => {
+      if (isDone) return {}
+
+      return axios.all(contributorId.map(id => getUserFollowers(id)))
+    })
     .then(followers => {
-      const totalFollowers = followers.reduce((a, b) => a + b, 0)
-      const attention =
-        repoAttention.stars + repoAttention.forks + totalFollowers
-      const newRepoAttention = {
-        ...repoAttention,
+      if (isDone) return {}
+
+      const accumlator = (a, b) => a + b
+      const initialValue = 0
+      const totalFollowers = followers.reduce(accumlator, initialValue)
+      const attention = repoData.stars + repoData.forks + totalFollowers
+      return {
+        ...repoData,
         attention,
         followers: totalFollowers,
       }
-      return newRepoAttention
     })
 }
+
+// const funcWrap = func =>
+//   function (inputs) {
+//     return isEmpty(inputs) ? undefined : func(...Array.from(arguments))
+//   }
