@@ -6,6 +6,7 @@ import styles from './Repo.module.scss'
 const cx = classNames.bind(styles)
 
 const Repo = ({
+  className,
   htmlUrl,
   name,
   description,
@@ -16,14 +17,14 @@ const Repo = ({
   attention,
 }) => (
   <Fragment>
-    <div className={cx('repo-data')}>
+    <div className={cx('repo-data', className)}>
       <div className={cx('repo-text')}>
         <a className={cx('repo-name')} href={htmlUrl}>
           {name}
         </a>
         <div className={cx('repo-description')}>{description}</div>
       </div>
-      {language ? <div>{language}</div> : null}
+      {language && <div>{language}</div>}
       <div>stars : {stars}</div>
       <div>forks : {forks}</div>
       <div>
@@ -35,14 +36,27 @@ const Repo = ({
 )
 
 Repo.propTypes = {
-  htmlUrl: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-  stars: PropTypes.number.isRequired,
-  forks: PropTypes.number.isRequired,
-  followers: PropTypes.number.isRequired,
-  attention: PropTypes.number.isRequired,
+  className: PropTypes.string,
+  htmlUrl: PropTypes.string,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  language: PropTypes.string,
+  stars: PropTypes.number,
+  forks: PropTypes.number,
+  followers: PropTypes.number,
+  attention: PropTypes.number,
+}
+
+Repo.defaultProps = {
+  className: '',
+  htmlUrl: '',
+  name: '',
+  description: '',
+  language: '',
+  stars: 0,
+  forks: 0,
+  followers: 0,
+  attention: 0,
 }
 
 export default Repo

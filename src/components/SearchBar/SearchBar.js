@@ -25,11 +25,15 @@ const SearchBar = ({ className, inputValue, onChange, onClick, onKeyDown }) => (
 )
 
 SearchBar.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   inputValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
+}
+
+SearchBar.defaultProps = {
+  className: '',
 }
 
 export default SearchBar

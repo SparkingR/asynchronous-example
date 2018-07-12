@@ -7,16 +7,17 @@ const cx = classNames.bind(styles)
 
 class COMPONENT_NAME extends Component {
   static propTypes = {
-
+    className: PropTypes.string,
   }
 
   static defaultProps = {
-
+    className: '',
   }
 
   render() {
+    const { className } = this.props
     return (
-      <div className={cx('component_name')}>
+      <div className={cx('component_name', className)}>
         COMPONENT_NAME
       </div>
     )

@@ -25,6 +25,9 @@
 }
 
 .repo-text {
+  @include size(100%);
+  @include long-text-hidden;
+
   color: $repo-text;
 
   .repo-name {
