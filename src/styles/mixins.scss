@@ -123,13 +123,13 @@
   }
 }
 
-@mixin long-text-hidden {
+@mixin text-overflow-hidden {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-@mixin three-dim-text {
+@mixin text-three-dim {
   text-shadow:
     0 0 0 #eee,
     0 1px 0 #ccc,

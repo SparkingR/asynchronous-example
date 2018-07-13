@@ -63,7 +63,7 @@ export const getContributorIds = contributorsUrl =>
     fullUrl: contributorsUrl,
   })
     .then(
-      res => (isEmpty(res.data) ? [] : res.data.slice(0, contributorsLimit))
+      res => (!isEmpty(res.data) ? res.data.slice(0, contributorsLimit) : [])
     )
     .then(contributors => contributors.map(contributor => contributor.login))
 

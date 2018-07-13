@@ -9,9 +9,8 @@ const cx = classNames.bind(styles)
 
 const ErrorHolder = ({ className }) => (
   <FontAwesomeIcon
-    className={cx('error-holder', className)}
+    className={cx('error-holder', 'error-icon', className)}
     icon={faExclamationTriangle}
-    inverse
   />
 )
 

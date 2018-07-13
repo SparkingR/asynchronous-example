@@ -14,8 +14,14 @@
   }
 }
 
+.github-icon.github-icon {
+  @include size(100px, 100px);
+
+  color: $github-icon;
+}
+
 .title {
   margin-left: 40px;
   font-size: rem(80px);
-  color: $title;
+  color: $header-title;
 }

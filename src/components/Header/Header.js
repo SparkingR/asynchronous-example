@@ -9,7 +9,7 @@ const cx = classNames.bind(styles)
 
 const Header = ({ className }) => (
   <div className={cx('header', className)}>
-    <FontAwesomeIcon icon={faGithub} size="6x" inverse />
+    <FontAwesomeIcon className={cx('github-icon')} icon={faGithub} />
     <span className={cx('title')}>Github Repo Attention</span>
   </div>
 )

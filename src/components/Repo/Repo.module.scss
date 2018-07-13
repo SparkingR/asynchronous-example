@@ -26,7 +26,7 @@
 
 .repo-text {
   @include size(100%);
-  @include long-text-hidden;
+  @include text-overflow-hidden;
 
   color: $repo-text;
 

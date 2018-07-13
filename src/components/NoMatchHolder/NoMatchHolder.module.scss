@@ -3,13 +3,13 @@
 @import '~styles/variables';
 
 .no-match-holder {
-  @include three-dim-text;
+  @include text-three-dim;
 
   font-size: rem(80px);
-  animation: move 5s linear infinite alternate;
+  animation: color-gradient 5s linear infinite alternate;
 }
 
-@keyframes move {
+@keyframes color-gradient {
   0% {
     color: $bg-end;
   }

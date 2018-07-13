@@ -6,7 +6,7 @@
   @include size(100%, 50px);
   @include horizontal-center($type: margin);
   @include flex-center;
-  @include position(relative,$top:0);
+  @include position(relative, $top: 0);
 
   z-index: 1;
   transition: 1s;
@@ -36,12 +36,13 @@
   @include size(70px, 50px);
   @include flex-center;
 
-  background: $btn;
+  background: $search-bar-btn;
   border-radius: 0 10px 10px 0;
 
   .search-icon {
     @include size(20px, 20px);
 
+    color: $search-icon;
     transition: 0.3s;
   }
 
