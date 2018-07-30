@@ -1,0 +1,12 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.app {
+  @include size(100%,100%);
+}
+
+.hearder-offset.hearder-offset,
+.search-bar-offset.search-bar-offset {
+  top: 200px;
+}

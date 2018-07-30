@@ -1,0 +1,53 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.repo-data {
+  @include size(80%);
+  @include horizontal-center($type: margin);
+
+  font-size: rem(45px);
+
+  > *:not(:first-child) {
+    &:nth-child(odd) {
+      color: $repo-odd;
+    }
+
+    &:nth-child(even) {
+      color: $repo-even;
+    }
+
+    &::before {
+      font-size: rem(25px);
+      content: '●';
+    }
+  }
+}
+
+.repo-text {
+  @include size(100%);
+  @include text-overflow-hidden;
+
+  color: $repo-text;
+
+  .repo-name {
+    font-size: rem(65px);
+
+    &:link,
+    &:visited {
+      color: $repo-text;
+    }
+  }
+
+  .repo-description {
+    @include size(80%);
+    @include horizontal-center($type: margin);
+
+    font-size: rem(25px);
+  }
+}
+
+.repo-attention {
+  font-size: rem(80px);
+  color: $repo-attention;
+}

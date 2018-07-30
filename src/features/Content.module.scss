@@ -1,0 +1,11 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.content {
+  @include size(100%, calc(100% - 250px));
+  @include flex-center;
+
+  flex-direction: column;
+  text-align: center;
+}

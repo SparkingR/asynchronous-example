@@ -1,0 +1,13 @@
+{
+  "env": {
+    "development": {
+    },
+    "production": {},
+    "test": {}
+  },
+  "presets": [],
+  "plugins": [
+    "lodash",
+    ["idx"]
+  ]
+}

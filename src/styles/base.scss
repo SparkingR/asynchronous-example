@@ -1,0 +1,41 @@
+/* stylelint-disable selector-max-id */
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+@import './normalize';
+@import './fonts';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'VT323', sans-serif;
+}
+
+*:not(input) {
+  user-select: none;
+}
+
+html,
+body,
+#root {
+  @include size(100%, 100%);
+}
+
+#root {
+  background-image: linear-gradient(180deg, $bg-start 15%, $bg-end 100%);
+  background-size: 100% 200%;
+  animation: bg 5s infinite alternate;
+}
+
+@keyframes bg {
+  0% {
+    background-position: 100% 20%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}

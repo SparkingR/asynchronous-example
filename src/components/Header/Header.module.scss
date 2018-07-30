@@ -1,0 +1,27 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.header {
+  @include size(100%, 200px, 200px);
+  @include position(relative, $top: 0);
+
+  text-align: center;
+  transition: 1s;
+
+  > * {
+    vertical-align: middle;
+  }
+}
+
+.github-icon.github-icon {
+  @include size(100px, 100px);
+
+  color: $github-icon;
+}
+
+.title {
+  margin-left: 40px;
+  font-size: rem(80px);
+  color: $header-title;
+}

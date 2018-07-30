@@ -2,4 +2,6 @@ node_modules
 lib
 dist
 public
+config
+scripts
 serviceWorker.js

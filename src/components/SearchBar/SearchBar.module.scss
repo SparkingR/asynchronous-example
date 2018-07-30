@@ -1,0 +1,56 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.search-bar {
+  @include size(100%, 50px);
+  @include horizontal-center($type: margin);
+  @include flex-center;
+  @include position(relative, $top: 0);
+
+  z-index: 1;
+  transition: 1s;
+
+  > * {
+    border: 0;
+    outline: none;
+    transition: 0.3s;
+  }
+}
+
+.text-field {
+  @include size(450px, 50px);
+
+  font-size: rem(35px);
+  color: $search-bar-text;
+  text-align: center;
+  border-radius: 10px 0 0 10px;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 0 2px $search-bar-hover inset;
+  }
+}
+
+.submit-btn {
+  @include size(70px, 50px);
+  @include flex-center;
+
+  background: $search-bar-btn;
+  border-radius: 0 10px 10px 0;
+
+  .search-icon {
+    @include size(20px, 20px);
+
+    color: $search-icon;
+    transition: 0.3s;
+  }
+
+  &:hover {
+    background: $search-bar-hover;
+
+    .search-icon {
+      @include size(30px, 30px);
+    }
+  }
+}

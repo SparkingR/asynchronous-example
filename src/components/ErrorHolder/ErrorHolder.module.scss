@@ -1,0 +1,11 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.error-holder.error-holder {
+  @include size(300px, 300px);
+}
+
+.error-icon.error-icon {
+  color: $error-icon;
+}

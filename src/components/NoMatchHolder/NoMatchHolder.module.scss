@@ -1,0 +1,20 @@
+@import 'sass-rem';
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.no-match-holder {
+  @include text-three-dim;
+
+  font-size: rem(80px);
+  animation: color-gradient 5s linear infinite alternate;
+}
+
+@keyframes color-gradient {
+  0% {
+    color: $bg-end;
+  }
+
+  100% {
+    color: $bg-start;
+  }
+}
